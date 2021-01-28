@@ -1,32 +1,106 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="app">
+        <router-view />
     </div>
-    <router-view/>
-  </div>
 </template>
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+    background: #F8F8F8;
+    border-radius: 10px;
+    font-family: "GothamPro", sans-serif;
+    font-weight: bold;
 }
 
-#nav {
-  padding: 30px;
+@font-face {
+    font-family: "GothamPro";
+    src: url("./assets/fonts/GothamProRegular/GothamProRegular.eot");
+    src: url("./assets/fonts/GothamProRegular/GothamProRegular.eot?#iefix")
+            format("embedded-opentype"),
+        url("./assets/fonts/GothamProRegular/GothamProRegular.woff")
+            format("woff"),
+        url("./assets/fonts/GothamProRegular/GothamProRegular.ttf")
+            format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
 
-  a {
+@font-face {
+    font-family: "GothamPro";
+    src: url("./assets/fonts/GothamProBold/GothamProBold.eot");
+    src: url("./assets/fonts/GothamProBold/GothamProBold.eot?#iefix")
+            format("embedded-opentype"),
+        url("./assets/fonts/GothamProBold/GothamProBold.woff") format("woff"),
+        url("./assets/fonts/GothamProBold/GothamProBold.ttf") format("truetype");
+    font-style: bold;
     font-weight: bold;
-    color: #2c3e50;
+}
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+/* Убираем внутренние отступы */
+ul[class],
+ol[class] {
+    padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+/* Выставляем основные настройки по-умолчанию для body */
+body {
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+}
+
+/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
+ul[class],
+ol[class] {
+    list-style: none;
+}
+
+/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+}
+
+/* Упрощаем работу с изображениями */
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Указываем понятную периодичность в потоке данных у article*/
+article > * + * {
+    margin-top: 1em;
+}
+
+/* Наследуем шрифты для инпутов и кнопок */
+input,
+button,
+textarea,
+select {
+    font: inherit;
 }
 </style>

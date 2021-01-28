@@ -1,18 +1,35 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div>
+        <div class="wrapper">
+            <app-header/>
+            <filters/>
+            <transition appear
+            appear-active-class="fade-enter-active"
+    @before-appear="beforeAppear"
+    @appear="appear"
+    @after-appear="afterAppear">
+                <building-cards/>
+            </transition>
+        </div>
+    </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
+    name: 'Home',
+    components: {
+        AppHeader: () => import('../components/Header'),
+        Filters: () => import('../components/Filters'),
+        BuildingCards: () => import('../components/BuildingCards'),
+    },
 }
 </script>
+
+<style lang="scss" scoped>
+
+.wrapper {
+    width: 1130px;
+    margin: 0 auto;
+}
+
+</style>

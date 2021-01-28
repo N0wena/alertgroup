@@ -1,0 +1,1 @@
+export const SET_BUILDINGS_DATA = 'SET_BUILDINGS_DATA'
