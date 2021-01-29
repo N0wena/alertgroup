@@ -26,6 +26,7 @@ export default {
 
 <style lang="scss">
 .vue-slider-dot-handle {
+    position: relative;
     width: 125% !important;
     height: 125% !important;
 }
