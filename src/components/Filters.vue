@@ -26,8 +26,8 @@ export default {
 
 <style lang="scss">
 .vue-slider-dot-handle {
-    width: 125%;
-    height: 125%;
+    width: 125% !important;
+    height: 125% !important;
 }
 
 .vue-slider-dot-handle::after {
@@ -44,16 +44,16 @@ export default {
 }
 
 .vue-slider-process {
-    background-color: #70D24E;
+    background-color: #70D24E !important;
 }
 
 .vue-slider-dot-handle-focus {
-    box-shadow: 0px 0px 1px 2px rgba(38, 207, 47, 0.36);
+    box-shadow: 0px 0px 1px 2px rgba(38, 207, 47, 0.36) !important;
 }
 
 .vue-slider-dot-tooltip-inner {
-    border-color: #70D24E;
-    background-color: #70D24E;
+    border-color: #70D24E !important;
+    background-color: #70D24E !important;
 }
 
 .filters {
