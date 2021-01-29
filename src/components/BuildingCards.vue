@@ -77,11 +77,21 @@ export default {
 <style lang="scss" scoped>
 
 .cards {
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 1vw;
     justify-items: center;
     align-items: center;
+
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
 }
 
 .card {
@@ -96,18 +106,18 @@ export default {
     transition: 0.3s ease-out;
     overflow: hidden;
     
-  &-move { transition: all 600ms ease-in-out 50ms }
-  &-enter-active { transition: all 300ms ease-out }
+    &-move { transition: all 600ms ease-in-out 50ms }
+    &-enter-active { transition: all 300ms ease-out }
 
-  &-leave-active {
-    transition: all 200ms ease-in;
-    position: absolute;
-    z-index: 0;
-  }
+    &-leave-active {
+        transition: all 200ms ease-in;
+        position: absolute;
+        z-index: 0;
+    }
 
-  &-enter,
-  &-leave-to { opacity: 0 }
-  &-enter { transform: scale(0.9) }
+    &-enter,
+    &-leave-to { opacity: 0 }
+    &-enter { transform: scale(0.9) }
 
     &:hover {
         box-shadow: 0px 5px 20px rgba(86, 86, 86, 0.25);

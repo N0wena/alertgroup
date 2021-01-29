@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <menu class="filter">
+    <div class="self-to-end">
+        <menu class="menu filter">
             <button class="filter__btn" @click="filterBuildings">Применить</button>
             <p class="filter__reset" @click="clearFilter">Сбросить фильтр</p>
         </menu>
@@ -24,10 +24,10 @@ export default {
             let vm = this;
             this.$store.state.filteredBuildings = [...this.$store.state.buildings]
             this.$store.state.filteredBuildings = this.$store.state.filteredBuildings
-                .filter(el => el.rooms == vm.$store.state.selectedRoom)
-                .filter(el => el.floor >= vm.$store.state.rangeFloor[0] && el.floor <= vm.$store.state.rangeFloor[1])
-                .filter(el => el.square >= vm.$store.state.rangeSquare[0] && el.square <= vm.$store.state.rangeSquare[1])
-                .filter(el => el.price >= vm.$store.getters.trueRangeCost[0] && el.price <= vm.$store.getters.trueRangeCost[1])
+                .filter(el => el.rooms == vm.$store.state.selectedRoom) // Фильтр по кол-во комнат
+                .filter(el => el.floor >= vm.$store.state.rangeFloor[0] && el.floor <= vm.$store.state.rangeFloor[1]) // Фильтр по этажу
+                .filter(el => el.square >= vm.$store.state.rangeSquare[0] && el.square <= vm.$store.state.rangeSquare[1]) // Фильтр по площади
+                .filter(el => el.price >= vm.$store.getters.trueRangeCost[0] && el.price <= vm.$store.getters.trueRangeCost[1]) // Фильтр по цене
         },
 
         clearFilter() {
@@ -38,12 +38,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.self-to-end {
+    align-self: flex-end;
+}
 
 .filter {
     display: flex;
     flex-direction: column;
     align-items: center;
-    align-self: center;
 
     &__btn {
         display: flex;

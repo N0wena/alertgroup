@@ -28,6 +28,7 @@ export default {
 .filters {
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
     margin-bottom: 50px;
 }
 
