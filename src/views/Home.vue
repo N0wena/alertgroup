@@ -3,11 +3,7 @@
         <div class="wrapper">
             <app-header/>
             <filters/>
-            <transition appear
-            appear-active-class="fade-enter-active"
-    @before-appear="beforeAppear"
-    @appear="appear"
-    @after-appear="afterAppear">
+            <transition>
                 <building-cards/>
             </transition>
         </div>
