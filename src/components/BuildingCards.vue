@@ -77,11 +77,6 @@ export default {
 <style lang="scss" scoped>
 
 .cards {
-    height: 100vh;
-    overflow-x: hidden;
-    overflow-y: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 1vw;
