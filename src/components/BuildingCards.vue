@@ -1,38 +1,40 @@
 <template>
-    <div class="cards">
-        <div
-            class="card"
-            v-for="(building, index) in buildings"
-            :key="building.id"
-            @mouseover="isHoverCard(index)"
-            @mouseleave="isHoverCard(-1)"
-        >
-            <div class="card__title">
-                <p class="card__title-floor">
-                    <span class="opacity"> {{ building.is_studio }} этаж </span>
-                </p>
-                <p class="card__title-room">
-                    {{ building.rooms }} комната <span class="opacity">-</span>
-                    {{ building.square }}м<sup>2</sup>
-                </p>
+    <div>
+        <transition-group name="card" class="cards">
+            <div
+                class="card"
+                v-for="(building, index) in filteredBuildings"
+                :key="building.id"
+                @mouseover="isHoverCard(index)"
+                @mouseleave="isHoverCard(-1)"
+            >
+                <div class="card__title">
+                    <p class="card__title-floor">
+                        <span class="opacity"> {{ building.floor }} этаж </span>
+                    </p>
+                    <p class="card__title-room">
+                        {{ building.rooms }} комната <span class="opacity">-</span>
+                        {{ building.square }}м<sup>2</sup>
+                    </p>
+                </div>
+                <figure class="card__picture" :class="{ 'selected-height': active == index }">
+                    <figcaption>№{{ building.number }}</figcaption>
+                    <img
+                        :src="require('../assets' + building.plan)"
+                        :alt="building.building_name"
+                    />
+                </figure>
+                <div class="card__price">
+                    <p class="card__price-total">{{ building.price | format }}р.</p>
+                    <p class="card__price-for-square">
+                        <span class="opacity">
+                            {{ (building.price / building.square) | round | format }} р. за м<sup>2</sup>
+                        </span>
+                    </p>
+                </div>
+                <button class="card__button" v-show="active == index">Подробнее</button>
             </div>
-            <figure class="card__picture" :class="{ 'selected-height': active == index }">
-                <figcaption>№{{ building.number }}</figcaption>
-                <img
-                    :src="require('../assets' + building.plan)"
-                    :alt="building.building_name"
-                />
-            </figure>
-            <div class="card__price">
-                <p class="card__price-total">{{ building.price | format }}р.</p>
-                <p class="card__price-for-square">
-                    <span class="opacity">
-                        {{ (building.price / building.square) | format }} р. за м<sup>2</sup>
-                    </span>
-                </p>
-            </div>
-            <button class="card__button" v-show="active == index">Подробнее</button>
-        </div>
+        </transition-group>
     </div>
 </template>
 
@@ -51,6 +53,14 @@ export default {
         ...mapState({
             buildings: (state) => state.buildings,
         }),
+
+        filteredBuildings() {
+            if (this.$store.state.filteredBuildings) {
+                return this.$store.state.filteredBuildings
+            } else {
+                return this.$store.state.buildings
+            }
+        }
     },
     methods: {
         isHoverCard(index) {
@@ -59,6 +69,7 @@ export default {
     },
     filters: {
         format: (val) => `${val}`.replace(/(\d)(?=(\d{3})+([^\d]|$))/g, "$1 "),
+        round: (val) => Math.round(val)
     },
 };
 </script>
@@ -84,6 +95,19 @@ export default {
     box-shadow: 0px 5px 20px rgba(86, 86, 86, 0.05);
     transition: 0.3s ease-out;
     overflow: hidden;
+    
+  &-move { transition: all 600ms ease-in-out 50ms }
+  &-enter-active { transition: all 300ms ease-out }
+
+  &-leave-active {
+    transition: all 200ms ease-in;
+    position: absolute;
+    z-index: 0;
+  }
+
+  &-enter,
+  &-leave-to { opacity: 0 }
+  &-enter { transform: scale(0.9) }
 
     &:hover {
         box-shadow: 0px 5px 20px rgba(86, 86, 86, 0.25);
@@ -155,6 +179,12 @@ export default {
         border-radius: 2px 2px 5px 5px;
         border: none;
         margin: auto 0 0 0;
+        transition: 0.3s ease-out;
+
+        &:hover {
+            cursor: pointer;
+            background: #68e33e;
+        }
     }
 }
 
